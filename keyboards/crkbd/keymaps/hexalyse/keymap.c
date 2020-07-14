@@ -44,7 +44,7 @@ LT(_EXTEND, KC_E),KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                     
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                           MT(MOD_LCTL, KC_LGUI),   LT(_LOWER, ALGR(KC_E)),  KC_SPC,    KC_BSPC ,LT(_RAISE, KC_ENT),  KC_RALT \
+                           MT(MOD_LCTL, KC_LGUI), LOWER,  KC_SPC,    KC_BSPC ,LT(_RAISE, KC_ENT),  KC_RALT \
                                       //`--------------------------'  `--------------------------'
 
   ),
@@ -54,9 +54,9 @@ LT(_EXTEND, KC_E),KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                     
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       KC_TAB,    KC_Q,    KC_W,    KC_F,    KC_WBAK,KC_WFWD,                    KC_PGUP,    KC_HOME, KC_UP, KC_END, KC_SCLN, KC_BSPC,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      EXTEND,    KC_LALT, KC_LALT, KC_LSFT, KC_LCTL,  KC_G,                     KC_PGDN,    KC_LEFT,KC_DOWN,KC_RIGHT,KC_BSPC, KC_QUOT,\
+      EXTEND,    LCTL(KC_A), KC_LALT, KC_LSFT, KC_LCTL,  KC_G,                     KC_PGDN,    KC_LEFT,KC_DOWN,KC_RIGHT,KC_BSPC, KC_QUOT,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,   KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,\
+      KC_LSFT,LCTL(KC_Z),LCTL(KC_X),LCTL(KC_C),LCTL(KC_V),LCTL(KC_V),                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LGUI,   LOWER,  KC_SPC,    KC_BSPC , RAISE,  KC_RALT \
                                       //`--------------------------'  `--------------------------'
@@ -67,9 +67,9 @@ LT(_EXTEND, KC_E),KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                     
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_ESC, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_MINS,  KC_EQL, KC_LCBR, KC_RCBR, KC_PIPE,  KC_GRV,\
+      KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, RALT(KC_GRV), XXXXXXX,                      KC_MINS,  KC_EQL, KC_LCBR, KC_RCBR, KC_PIPE,  KC_GRV,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, KC_BSLS, KC_TILD,\
+      KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, RALT(KC_E), XXXXXXX,                      KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, KC_BSLS, KC_TILD,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LGUI,   LOWER,  KC_SPC,     KC_ENT,   RAISE, KC_RALT \
                                       //`--------------------------'  `--------------------------'
@@ -88,14 +88,14 @@ LT(_EXTEND, KC_E),KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                     
   ),
 
   [_EXTEND] =    LAYOUT( \
-  	  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,\
+  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+      KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                       KC_6,    KC_7,   KC_8,   KC_9,    KC_0, KC_BSPC,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, XXXXXXX, XXXXXXX,\
+      KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_LEFT, KC_4,   KC_5,   KC_6, XXXXXXX, XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
+      KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, KC_1, KC_2, KC_3, XXXXXXX, XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,   LOWER,  KC_SPC,     KC_ENT, _RAISE, KC_RALT \
+                                          KC_LGUI,   LOWER,  KC_SPC,     KC_ENT, _RAISE, KC_0\
                                       //`--------------------------'  `--------------------------'
     ),
 };
@@ -145,7 +145,7 @@ const char *read_logo(void);
 void set_keylog(uint16_t keycode, keyrecord_t *record);
 const char *read_keylog(void);
 const char *read_keylogs(void);
-const char *read_rgb_info(void);	
+const char *read_rgb_info(void);
 
 const char *read_mode_icon(bool swap);
 // const char *read_host_led_state(void);
@@ -202,7 +202,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case COLEMAK:
       if (record->event.pressed) {
         persistent_default_layer_set(1UL<<_COLEMAK);
-      }		
+      }
       return false;
     case LOWER:
       if (record->event.pressed) {
