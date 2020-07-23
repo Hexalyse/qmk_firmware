@@ -54,9 +54,9 @@ LT(_EXTEND, KC_E),KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                     
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       KC_TAB,    KC_Q,    KC_W,    KC_F,    KC_WBAK,KC_WFWD,                    KC_PGUP,    KC_HOME, KC_UP, KC_END, KC_SCLN, KC_BSPC,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      EXTEND,    LCTL(KC_A), KC_LALT, KC_LSFT, KC_LCTL,  KC_G,                     KC_PGDN,    KC_LEFT,KC_DOWN,KC_RIGHT,KC_BSPC, KC_DEL,\
+      EXTEND,    LCTL(KC_A), KC_LALT, KC_LSFT, KC_LCTL,  KC_G,                  KC_PGDN,    KC_LEFT,KC_DOWN,KC_RIGHT,KC_BSPC, KC_DEL,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,LCTL(KC_Z),LCTL(KC_X),LCTL(KC_C),LCTL(KC_V),LCTL(KC_V),                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,\
+      KC_LSFT,LCTL(KC_Z),LCTL(KC_X),LCTL(KC_C),LCTL(KC_V),LCTL(KC_V),           KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LGUI,   LOWER,  KC_SPC,    KC_BSPC , RAISE,  KC_RALT \
                                       //`--------------------------'  `--------------------------'
