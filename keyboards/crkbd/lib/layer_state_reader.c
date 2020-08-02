@@ -8,6 +8,7 @@
 #define L_LOWER 2
 #define L_RAISE 4
 #define L_ADJUST 8
+#define L_NUM 16
 #define L_ADJUST_TRI 14
 
 char layer_state_str[24];
@@ -23,6 +24,9 @@ const char *read_layer_state(void) {
     break;
   case L_LOWER:
     snprintf(layer_state_str, sizeof(layer_state_str), "Layer: Lower");
+    break;
+  case L_NUM:
+    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: Num");
     break;
   case L_ADJUST:
   case L_ADJUST_TRI:
