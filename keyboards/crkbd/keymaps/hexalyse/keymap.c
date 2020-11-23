@@ -10,6 +10,8 @@ extern uint8_t is_master;
 
 char wpm_str[10];
 
+bool left_oled_enable = true;
+
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
@@ -27,7 +29,8 @@ enum custom_keycodes {
   ADJUST,
   NUM,
   BACKLIT,
-  RGBRST
+  RGBRST,
+  TOGGLE_LEFT_OLED
 };
 
 
@@ -38,25 +41,25 @@ enum macro_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_COLEMAK] = LAYOUT( \
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-  LGUI_T(KC_TAB), KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                         KC_J,    KC_L,    KC_U,    KC_Y, KC_SCLN, KC_BSPC,\
+      KC_TAB, KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                         KC_J,    KC_L,    KC_U,    KC_Y, KC_SCLN, KC_BSPC,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       NUM,    KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                         KC_M,    KC_N,    KC_E,    KC_I,    KC_O, KC_QUOT,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, MT(MOD_RSFT, KC_ENT   ),\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                           MT(MOD_LCTL, KC_LGUI), LOWER,  KC_SPC,    KC_BSPC ,LT(_RAISE, KC_ENT),  KC_RALT \
+                             MT(MOD_LCTL, KC_LGUI), LOWER, KC_SPC,    MT(MOD_LGUI, KC_BSPC) ,LT(_RAISE, KC_ENT),  KC_RALT \
                                       //`--------------------------'  `--------------------------'
   ),
 
   [_NUM] =    LAYOUT( \
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                       KC_6,    KC_7,   KC_8,   KC_9,    KC_0, KC_BSPC,\
+      KC_TAB,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                       KC_6,    KC_7,   KC_8,   KC_9,    KC_0, KC_BSPC,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL, LCTL(KC_A), KC_LALT, KC_LSFT, KC_LCTL, XXXXXXX,                      KC_LEFT, KC_4,   KC_5,   KC_6, XXXXXXX, XXXXXXX,\
+      XXXXXXX, LCTL(KC_A), KC_LALT, KC_LSFT, KC_LCTL, XXXXXXX,                      KC_LEFT, KC_4,   KC_5,   KC_6, XXXXXXX, XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,LCTL(KC_Z),LCTL(KC_X),LCTL(KC_C),LCTL(KC_V),LCTL(KC_V),       XXXXXXX, KC_1, KC_2, KC_3, KC_DOT, XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,   LOWER,  KC_SPC,     KC_ENT, RAISE, KC_0\
+                                          KC_LALT,   LOWER, KC_SPC,     KC_ENT, RAISE, KC_0\
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -69,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,LCTL(KC_Z),LCTL(KC_X),LCTL(KC_C),LCTL(KC_V),LCTL(KC_V),           KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,   LOWER,  KC_SPC,    KC_BSPC , RAISE,  KC_RALT \
+                                          KC_LGUI,   LOWER,  KC_SPC,   MT(MOD_LGUI, KC_BSPC) , LT(_RAISE, KC_ENT),  KC_RALT \
                                       //`--------------------------'  `--------------------------'
 
   ),
@@ -90,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
         RESET,  KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,                      KC_F6, KC_F8, KC_F8, KC_F9, KC_F10, KC_F11,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, RGBRST, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_F12,\
+      RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, RGBRST, XXXXXXX,                      XXXXXXX, TOGGLE_LEFT_OLED, XXXXXXX, XXXXXXX, XXXXXXX, KC_F12,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -170,7 +173,9 @@ void matrix_render_user(struct CharacterMatrix *matrix) {
     sprintf(wpm_str, "WPM: %03d", get_current_wpm());
     matrix_write(matrix, wpm_str);
   } else {
-    matrix_write(matrix, read_logo());
+      if (left_oled_enable) {
+        matrix_write(matrix, read_logo());
+      }
   }
 }
 
@@ -253,6 +258,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
       #endif
       break;
+    case TOGGLE_LEFT_OLED:
+        if (record->event.pressed) {
+            left_oled_enable = !left_oled_enable;
+        }
   }
   return true;
 }
