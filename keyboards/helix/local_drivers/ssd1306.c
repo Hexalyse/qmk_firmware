@@ -8,10 +8,7 @@
 #ifndef LOCAL_GLCDFONT
 #include "common/glcdfont.c"
 #else
-#include <helixfont.h>
-#endif
-#ifdef ADAFRUIT_BLE_ENABLE
-#include "adafruit_ble.h"
+#include "helixfont.h"
 #endif
 #ifdef PROTOCOL_LUFA
 #include "lufa.h"
