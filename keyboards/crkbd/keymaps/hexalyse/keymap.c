@@ -12,6 +12,10 @@ char wpm_str[10];
 
 bool left_oled_enable = true;
 
+qk_tap_dance_action_t tap_dance_actions[] = {
+};
+
+
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
@@ -30,12 +34,8 @@ enum custom_keycodes {
   NUM,
   BACKLIT,
   RGBRST,
-  TOGGLE_LEFT_OLED
-};
-
-
-enum macro_keycodes {
-  KC_SAMPLEMACRO,
+  TOGGLE_LEFT_OLED,
+  MACRO_THUMBSUP_DISCORD
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -72,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,LCTL(KC_Z),LCTL(KC_X),LCTL(KC_C),LCTL(KC_V),LCTL(KC_V),           KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,   LOWER,  KC_SPC,   MT(MOD_LGUI, KC_BSPC) , LT(_RAISE, KC_ENT),  KC_RALT \
+                                          KC_LGUI,   LOWER,  KC_SPC,   MT(MOD_LGUI, KC_BSPC) , RAISE,  KC_RALT \
                                       //`--------------------------'  `--------------------------'
 
   ),
@@ -81,9 +81,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_ESC, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, RALT(KC_GRV), XXXXXXX,                      KC_MINS,  KC_EQL, KC_LCBR, KC_RCBR, KC_PIPE,  KC_GRV,\
+      KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, RALT(KC_GRV), MACRO_THUMBSUP_DISCORD,  KC_MINS,  KC_EQL, KC_LCBR, KC_RCBR, KC_PIPE,  KC_GRV,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, RALT(KC_E), XXXXXXX,                      KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, KC_BSLS, KC_TILD,\
+      KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, RALT(KC_E), XXXXXXX,                   KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, KC_BSLS, KC_TILD,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LGUI,   LOWER,  KC_SPC,     KC_ENT,   RAISE, KC_RALT \
                                       //`--------------------------'  `--------------------------'
@@ -131,7 +131,8 @@ void matrix_init_user(void) {
 //SSD1306 OLED update loop, make sure to add #define SSD1306OLED in config.h
 #ifdef SSD1306OLED
 
-extern rgblight_config_t rgblight_config;
+// Uncomment if RGB activated and we want into on it
+/** extern rgblight_config_t rgblight_config;
 char rbf_info_str[24];
 const char *read_rgb_info(void) {
 
@@ -140,7 +141,7 @@ const char *read_rgb_info(void) {
     rgblight_config.hue, rgblight_config.sat, rgblight_config.val);
   return rbf_info_str;
 }
-
+**/
 // When add source files to SRC in rules.mk, you can use functions.
 const char *read_layer_state(void);
 const char *read_logo(void);
@@ -260,9 +261,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       #endif
       break;
     case TOGGLE_LEFT_OLED:
-        if (record->event.pressed) {
-            left_oled_enable = !left_oled_enable;
-        }
+      if (record->event.pressed) {
+          left_oled_enable = !left_oled_enable;
+      }
+      break;
+    case MACRO_THUMBSUP_DISCORD:
+      if (record->event.pressed) {
+        SEND_STRING("+:thumbsup:\n");
+      }
+      break;
   }
   return true;
 }
